@@ -4,11 +4,6 @@ const router = express.Router();
 const giphyService = require('../external_services/giphy/giphy.service');
 const pixabayService = require('../external_services/pixabay/pixabay.service');
 
-/* GET home page. */
-router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
 router.get('/giphy/trending', function (req, res, next) {
   giphyService.getGiphyTrending()
     .then((resp) => {
