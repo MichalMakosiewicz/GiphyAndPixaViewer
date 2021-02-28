@@ -9,7 +9,7 @@ router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/giphy', function (req, res, next) {
+router.get('/giphy/trending', function (req, res, next) {
   giphyService.getGiphyTrending()
     .then((resp) => {
       res.send(resp);
@@ -19,8 +19,31 @@ router.get('/giphy', function (req, res, next) {
     })
 });
 
-router.get('/pixabay', function (req, res, next) {
+router.get('/giphy/search', function (req, res, next) {
+  const query = req.query.query
+  giphyService.getGiphySearch(query)
+    .then((resp) => {
+      res.send(resp);
+    })
+    .catch((err) => {
+      res.status(500).send(err)
+    })
+});
+
+router.get('/pixabay/trending', function (req, res, next) {
   pixabayService.getPixabay()
+    .then((resp) => {
+      res.send(resp);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send(err)
+    })
+});
+
+router.get('/pixabay/search', function (req, res, next) {
+  const query = req.query.query
+  pixabayService.getPixabaySearch(query)
     .then((resp) => {
       res.send(resp);
     })

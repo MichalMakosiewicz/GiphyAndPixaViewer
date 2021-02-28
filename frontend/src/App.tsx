@@ -3,8 +3,8 @@ import AppBarComponent from './components/AppBarComponent';
 import SearchComponent from './components/SearchComponent'
 import LayoutComponent from './components/LayoutComponent';
 import { makeStyles } from '@material-ui/core/styles';
-import { getGiphy } from './services/giphyService';
-import { getPixabay } from './services/pixabayService';
+import { getGiphy, getGiphySearch } from './services/giphyService';
+import { getPixabay, getPixabaySearch } from './services/pixabayService';
 import Typography from '@material-ui/core/Typography';
 
 
@@ -25,16 +25,16 @@ function App() {
     const [data, setData] = useState([]);
     const [selected, setSelected] = useState(0);
     const [loaded, setLoaded] = useState(false);
-    const [searchPhrase, setSearchPhrase] = useState();
+    const [searchPhrase, setSearchPhrase] = useState("");
 
     useEffect(() => {
         getData(0);
     }, [])
 
-    const getData = (tab: number) => {        
+    const getData = (tab: number) => {
         if (tab === 0) {
             setLoaded(false);
-            getGiphy().then((result) => {                
+            getGiphy().then((result) => {
                 setData(result);
                 setLoaded(true);
             })
@@ -61,7 +61,19 @@ function App() {
     }
 
     const initSearch = () => {
-        console.log(searchPhrase);
+        if (selected === 0) {
+            setLoaded(false);
+            getGiphySearch(searchPhrase).then((result) => {
+                setData(result);
+                setLoaded(true);
+            })
+        } else {
+            setLoaded(false);
+            getPixabaySearch(searchPhrase).then((result) => {
+                setData(result);
+                setLoaded(true);
+            })
+        }
     }
 
     return (
