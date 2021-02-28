@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
     root: {
+        margin: "0 !important",
         backgroundColor: '#3A3A3C',
         minHeight: '100vh'
     },
