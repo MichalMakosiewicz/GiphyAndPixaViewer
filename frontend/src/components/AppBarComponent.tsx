@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: "#555558"
         }
     },
-    selectedButton : {
+    selectedButton: {
         marginLeft: '20px',
         color: "#FFFFFF",
         backgroundColor: "#555558",
@@ -29,11 +29,17 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function AppBarComponent(props: any) {
+interface AppBarProps {
+    tab: number;
+    selectTab: (number: number) => void
+}
+
+export default function AppBarComponent(props: AppBarProps) {
     const classes = useStyles();
+    const { tab, selectTab } = props;
 
     const buttonClick = (tab: number) => {
-        props.selectTab(tab);
+        selectTab(tab);
     }
 
     return (
@@ -43,7 +49,7 @@ export default function AppBarComponent(props: any) {
                     <Typography variant="h5" className={classes.title}>
                         Giphy & Pixabay Viewer
                     </Typography>
-                    <Button className={props.tab === 0 ? classes.selectedButton : classes.buttons} onClick={() => buttonClick(0)}>
+                    <Button className={tab === 0 ? classes.selectedButton : classes.buttons} onClick={() => buttonClick(0)}>
                         Giphy
                     </Button>
                     <Button className={props.tab === 1 ? classes.selectedButton : classes.buttons} onClick={() => buttonClick(1)}>

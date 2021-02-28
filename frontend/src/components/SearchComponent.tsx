@@ -25,15 +25,22 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function SearchComponent(props: any) {
+interface SearchProps {
+    searchValue: string;
+    initSearch: () => void
+    setSearch: (value: string) => void
+}
+
+export default function SearchComponent(props: SearchProps) {
     const classes = useStyles();
+    const { searchValue, initSearch, setSearch } = props;
 
     const updateSearch = (event: any) => {
-        props.setSearch(event.target.value);                        
+        setSearch(event.target.value);
     }
 
     const search = () => {
-        props.initSearch()
+        initSearch()
     }
 
     return (
@@ -44,7 +51,7 @@ export default function SearchComponent(props: any) {
                     placeholder="Search"
                     inputProps={{ 'aria-label': 'search google maps' }}
                     onChange={(event) => {
-                        updateSearch(event);                       
+                        updateSearch(event);
                     }}
                 />
                 <IconButton onClick={search} className={classes.iconButton} aria-label="search">
