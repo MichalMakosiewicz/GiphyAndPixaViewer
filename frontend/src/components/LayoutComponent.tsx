@@ -25,13 +25,9 @@ export default function LayoutComponent(props: LayoutProps) {
     const { tab, giphsData } = props;
 
     const renderGiphs = () => {
-        return giphsData.map((giphData: any) => {
-            if (tab === 0) {
-                return <img className={classes.img} key={giphData.id} src={giphData.images.fixed_height.url} />
-            } else {
-                return <img className={classes.img} key={giphData.id} src={giphData.previewURL} />
-            }
-        });
+        return giphsData.map((url: any) => {
+                return <img className={classes.img} key={url} src={url} />
+            });
     }
 
     return (

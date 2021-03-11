@@ -3,8 +3,7 @@ import AppBarComponent from './components/AppBarComponent';
 import SearchComponent from './components/SearchComponent'
 import LayoutComponent from './components/LayoutComponent';
 import { makeStyles } from '@material-ui/core/styles';
-import { getGiphy, getGiphySearch } from './services/giphyService';
-import { getPixabay, getPixabaySearch } from './services/pixabayService';
+import { getGiphs, getGiphsSearch } from './services/giphsService';
 import Typography from '@material-ui/core/Typography';
 
 
@@ -35,13 +34,13 @@ function App() {
     const getData = (tab: number) => {
         if (tab === 0) {
             setLoaded(false);
-            getGiphy().then((result) => {
+            getGiphs('giphy').then((result) => {
                 setData(result);
                 setLoaded(true);
             })
         } else if (tab === 1) {
             setLoaded(false);
-            getPixabay().then((result) => {
+            getGiphs('pixabay').then((result) => {
                 setData(result);
                 setLoaded(true);
             })
@@ -64,13 +63,13 @@ function App() {
     const initSearch = () => {
         if (selected === 0) {
             setLoaded(false);
-            getGiphySearch(searchPhrase).then((result) => {
+            getGiphsSearch('giphy', searchPhrase).then((result) => {
                 setData(result);
                 setLoaded(true);
             })
         } else {
             setLoaded(false);
-            getPixabaySearch(searchPhrase).then((result) => {
+            getGiphsSearch('pixabay', searchPhrase).then((result) => {
                 setData(result);
                 setLoaded(true);
             })

@@ -15,3 +15,7 @@ App to view gifs and pictures from `https://giphy.com/` and `https://pixabay.com
   5. Run `npm install`
   6. Run `npm run start`
   7. App should be running on `http://localhost:8000/`
+
+## Run test
+
+  1. Run `npm run test`

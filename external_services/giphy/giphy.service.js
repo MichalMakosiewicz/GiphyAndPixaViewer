@@ -9,11 +9,10 @@ async function getGiphyTrending() {
             rating: 'G',
             lang: 'en',
         }
-    })
-        .catch((err) => {
-            console.log(err);
-        });
-    return data.data.data;
+    }).catch((err) => {
+        console.log(err);
+    });
+    return await mapGiphyResponse(data);
 }
 
 async function getGiphySearch(query) {
@@ -25,11 +24,16 @@ async function getGiphySearch(query) {
             rating: 'G',
             lang: 'en',
         }
-    })
-        .catch((err) => {
-            console.log(err);
-        });
-    return data.data.data;
+    }).catch((err) => {
+        console.log(err);
+    });
+    return await mapGiphyResponse(data);
+}
+
+async function mapGiphyResponse(resp) {
+    return await resp.data.data.map((giph) => {
+        return giph.images.fixed_height.url
+    });
 }
 
 module.exports = {

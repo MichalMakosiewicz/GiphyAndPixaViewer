@@ -12,7 +12,7 @@ async function getPixabay() {
         console.log(err);
     });
 
-    return data.data.hits;
+    return mapPixabayResponse(data);
 }
 
 async function getPixabaySearch(query) {
@@ -26,7 +26,13 @@ async function getPixabaySearch(query) {
         console.log(err);
     });
 
-    return data.data.hits;
+    return mapPixabayResponse(data);
+}
+
+function mapPixabayResponse(resp) {
+    return resp.data.hits.map((giph) => {
+        return giph.previewURL;
+    })
 }
 
 module.exports = {
